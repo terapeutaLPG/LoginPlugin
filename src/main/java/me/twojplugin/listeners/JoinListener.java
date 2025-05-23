@@ -27,16 +27,16 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        String name = p.getName();
 
-        // 1) jeśli był w locie przy wylogu → zabij go natychmiast
-        if (QuitListener.fallKill.remove(p.getName())) {
-            p.setHealth(0);
-            return;
+        // logowanie wejścia
+        if (auth.isRegistered(name) || Main.premiumPlayers.contains(name)) {
+            auth.logJoin(name);
         }
 
-        // 2) premium autologin + restore
-        if (Main.premiumPlayers.contains(p.getName())) {
-            auth.setLoggedIn(p.getName());
+        // premium autologin
+        if (Main.premiumPlayers.contains(name)) {
+            auth.setLoggedIn(name);
             p.sendMessage(ChatColor.BLUE + "Automatyczne logowanie (premium).");
             pdm.loadPlayer(p);
             p.removePotionEffect(PotionEffectType.BLINDNESS);
@@ -44,8 +44,8 @@ public class JoinListener implements Listener {
             return;
         }
 
-        // 3) normalne wejście: reset stanu + efekt ślepoty
-        auth.logout(p.getName());
+        // zablokowane dopóki nie zaloguje się normalnie
+        auth.logout(name);
         Location spawn = p.getWorld().getSpawnLocation();
         p.teleport(spawn);
         p.setHealth(p.getMaxHealth());
@@ -55,8 +55,8 @@ public class JoinListener implements Listener {
         p.setLevel(0);
         p.setTotalExperience(0);
         p.setGameMode(GameMode.ADVENTURE);
+        // poprawne wywołanie
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1, false, false));
-
         p.sendMessage(ChatColor.YELLOW + "Witaj! Zaloguj się (/login) lub zarejestruj (/register).");
     }
 }

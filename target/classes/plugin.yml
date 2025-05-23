@@ -5,29 +5,29 @@ api-version: 1.21
 
 commands:
   register:
-    description: Register new account
+    description: Zarejestruj nowe konto
     usage: /register <hasło> <powtórz>
   login:
-    description: Login to your account
+    description: Zaloguj się do konta
     usage: /login <hasło>
   zmienhaslo:
-    description: Change your own password
+    description: Zmień swoje hasło
     usage: /zmienhaslo <stare> <nowe> <powtórz>
   jzmienhaslo:
-    description: Admin change a user’s password
+    description: Admin zmienia hasło
     usage: /jzmienhaslo <nick> <nowe_hasło>
   unregister:
-    description: Remove a registered account (OP only)
+    description: Usuń konto gracza (OP)
     usage: /unregister <nick>
   premium:
-    description: Grant premium autologin
+    description: Dodaj premium autologowanie
     usage: /premium <nick>
   unpremium:
-    description: Revoke premium autologin
+    description: Odejmij premium autologowanie
     usage: /unpremium <nick>
   lastlogin:
-    description: Show registration & last login info
+    description: Pokaż daty rejestracji/wejścia/wyjścia
     usage: /lastlogin [nick]
   loginhelp:
-    description: Show plugin help
+    description: Pomoc pluginu
     usage: /loginhelp

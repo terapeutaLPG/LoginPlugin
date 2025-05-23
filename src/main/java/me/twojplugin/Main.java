@@ -28,14 +28,17 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // zasoby
         saveResource("users.yml", false);
+        saveResource("playerdata.yml", false);
         saveDefaultConfig();
         getConfig().getStringList("premium").forEach(premiumPlayers::add);
 
-        this.auth = new AuthManager(this);
-        this.pdm = new PlayerDataManager(this);
+        // init
+        auth = new AuthManager(this);
+        pdm = new PlayerDataManager(this);
 
-        // komendy
+        // rejestracja komend
         getCommand("register").setExecutor(new RegisterCommand(this, auth));
         getCommand("login").setExecutor(new LoginCommand(this, auth));
         getCommand("zmienhaslo").setExecutor(new ChangePasswordCommand(auth));

@@ -1,12 +1,15 @@
 package me.twojplugin.commands;
 
-import me.twojplugin.utils.AuthManager;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.twojplugin.utils.AuthManager;
+
 public class ChangePasswordCommand implements CommandExecutor {
+
     private final AuthManager auth;
 
     public ChangePasswordCommand(AuthManager auth) {
@@ -15,25 +18,25 @@ public class ChangePasswordCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player) || !sender.hasPermission("loginplugin.changepassword")) {
-            sender.sendMessage("Brak uprawnień.");
+        if (!(sender instanceof Player p)) {
+            sender.sendMessage("Tylko gracze mogą zmienić hasło.");
             return true;
         }
-        Player p = (Player) sender;
         if (args.length != 3) {
-            p.sendMessage("Użycie: /zmienhaslo <stare> <nowe> <powtórz>");
+            p.sendMessage(ChatColor.RED + "Użycie: /zmienhaslo <stare> <nowe> <powtórz>");
             return true;
         }
-        if (!auth.checkPassword(p.getName(), args[0])) {
-            p.sendMessage("Błędne stare hasło.");
+        String old = args[0], nw = args[1], rep = args[2];
+        if (!nw.equals(rep)) {
+            p.sendMessage(ChatColor.RED + "Nowe hasła nie są identyczne.");
             return true;
         }
-        if (!args[1].equals(args[2])) {
-            p.sendMessage("Nowe hasła się różnią.");
+        if (!auth.checkPassword(p.getName(), old)) {
+            p.sendMessage(ChatColor.RED + "Stare hasło jest niepoprawne.");
             return true;
         }
-        auth.changePassword(p.getName(), args[1]);
-        p.sendMessage("Hasło zmienione pomyślnie.");
+        auth.changePassword(p.getName(), nw);
+        p.sendMessage(ChatColor.GREEN + "Hasło zostało zmienione pomyślnie.");
         return true;
     }
 }
