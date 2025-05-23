@@ -1,0 +1,33 @@
+name: LoginPlugin
+version: 1.0
+main: me.twojplugin.Main
+api-version: 1.21
+
+commands:
+  register:
+    description: Register new account
+    usage: /register <hasło> <powtórz>
+  login:
+    description: Login to your account
+    usage: /login <hasło>
+  zmienhaslo:
+    description: Change your own password
+    usage: /zmienhaslo <stare> <nowe> <powtórz>
+  jzmienhaslo:
+    description: Admin change a user’s password
+    usage: /jzmienhaslo <nick> <nowe_hasło>
+  unregister:
+    description: Remove a registered account (OP only)
+    usage: /unregister <nick>
+  premium:
+    description: Grant premium autologin
+    usage: /premium <nick>
+  unpremium:
+    description: Revoke premium autologin
+    usage: /unpremium <nick>
+  lastlogin:
+    description: Show registration & last login info
+    usage: /lastlogin [nick]
+  loginhelp:
+    description: Show plugin help
+    usage: /loginhelp

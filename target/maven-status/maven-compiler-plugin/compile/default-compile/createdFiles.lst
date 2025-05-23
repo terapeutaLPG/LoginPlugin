@@ -1,0 +1,15 @@
+me\twojplugin\commands\UnpremiumCommand.class
+me\twojplugin\commands\ChangePasswordCommand.class
+me\twojplugin\listeners\QuitListener.class
+me\twojplugin\commands\LastLoginCommand.class
+me\twojplugin\listeners\RestrictedListener.class
+me\twojplugin\commands\UnregisterCommand.class
+me\twojplugin\commands\PremiumCommand.class
+me\twojplugin\commands\LoginHelpCommand.class
+me\twojplugin\utils\AuthManager.class
+me\twojplugin\commands\RegisterCommand.class
+me\twojplugin\utils\PlayerDataManager.class
+me\twojplugin\listeners\JoinListener.class
+me\twojplugin\Main.class
+me\twojplugin\commands\AdminChangePasswordCommand.class
+me\twojplugin\commands\LoginCommand.class
